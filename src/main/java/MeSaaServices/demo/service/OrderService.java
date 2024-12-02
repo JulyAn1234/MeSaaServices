@@ -157,6 +157,12 @@ public class OrderService {
 
     private EnrichedOrderAsCheckout convertToEnrichedOrderAsCheckout(Order order) {
         Optional<Table> tableOpt = tableRepository.findById(order.getTable());
+
+        //if table is not found, return null
+        if (!tableOpt.isPresent()) {
+            return null;
+        }
+
         Table table = tableOpt.orElseThrow(() -> new IllegalArgumentException("Table not found"));
 
         List<EnrichedCheckoutItem> checkoutItems = order.getFoods().stream()

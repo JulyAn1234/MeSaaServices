@@ -42,6 +42,8 @@ public class TableService {
         existingTable.setMesero(tableDTO.getMesero());
         existingTable.setPersonaTitular(tableDTO.getPersonaTitular());
 
+        System.out.println("TableService.updateTable: existingTable: " + existingTable);
+
         return tableRepository.save(existingTable);
     }
 
