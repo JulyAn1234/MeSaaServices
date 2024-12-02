@@ -181,7 +181,7 @@ public class OrderService {
         EnrichedOrderAsCheckout enrichedOrderAsCheckout = new EnrichedOrderAsCheckout();
 
         double subtotal = checkoutItems.stream().mapToDouble(EnrichedCheckoutItem::getTotalPriceForItem).sum();
-        double iva = subtotal * 0.8; // Assuming 16% IVA
+        double iva = subtotal * 0.08; // Assuming 16% IVA
         double fee = 0;
 
         if(order.getModality() == 2){
