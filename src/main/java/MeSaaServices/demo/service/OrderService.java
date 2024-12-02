@@ -181,7 +181,7 @@ public class OrderService {
         EnrichedOrderAsCheckout enrichedOrderAsCheckout = new EnrichedOrderAsCheckout();
 
         double subtotal = checkoutItems.stream().mapToDouble(EnrichedCheckoutItem::getTotalPriceForItem).sum();
-        double iva = subtotal * 0.08; // Assuming 16% IVA
+        double iva = subtotal * 0.8; // Assuming 16% IVA
         double fee = 0;
 
         if(order.getModality() == 2){
@@ -204,5 +204,10 @@ public class OrderService {
         enrichedOrderAsCheckout.setTotal(total);
         return enrichedOrderAsCheckout;
     }
+    public void deleteOrder(String orderId) {
+        if (!orderRepository.existsById(orderId)) {
+            throw new RuntimeException("Order not found with id: " + orderId);
+        }
+        orderRepository.deleteById(orderId);
+    }
 }
-
