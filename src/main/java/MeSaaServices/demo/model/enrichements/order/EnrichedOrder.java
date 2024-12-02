@@ -18,6 +18,7 @@ public class EnrichedOrder {
     private Table table;
     private String description;
     private String creationDate;
+    private Integer modality;
     private boolean ready;
     private boolean complete;
     private List <EnrichedOrderItem> foods;

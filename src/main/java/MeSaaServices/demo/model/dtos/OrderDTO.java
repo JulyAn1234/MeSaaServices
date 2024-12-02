@@ -18,5 +18,6 @@ public class OrderDTO {
     private String creationDate;
     private boolean ready;
     private boolean complete;
+    private Integer modality;
     private List<OrderItem> foods;
 }

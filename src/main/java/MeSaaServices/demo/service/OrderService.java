@@ -171,11 +171,18 @@ public class OrderService {
                 })
                 .collect(Collectors.toList());
 
-        double subtotal = checkoutItems.stream().mapToDouble(EnrichedCheckoutItem::getTotalPriceForItem).sum();
-        double iva = subtotal * 0.16; // Assuming 16% IVA
-        double total = subtotal + iva;
-
         EnrichedOrderAsCheckout enrichedOrderAsCheckout = new EnrichedOrderAsCheckout();
+
+        double subtotal = checkoutItems.stream().mapToDouble(EnrichedCheckoutItem::getTotalPriceForItem).sum();
+        double iva = subtotal * 0.8; // Assuming 16% IVA
+        double fee = 0;
+
+        if(order.getModality() == 2){
+            fee = 50;
+        }
+
+        double total = subtotal + iva + fee;
+
         enrichedOrderAsCheckout.setId(order.getId());
         enrichedOrderAsCheckout.setTable(table);
         enrichedOrderAsCheckout.setDescription(order.getDescription());
@@ -185,8 +192,8 @@ public class OrderService {
         enrichedOrderAsCheckout.setFoods(checkoutItems);
         enrichedOrderAsCheckout.setSubtotal(subtotal);
         enrichedOrderAsCheckout.setIVA(iva);
+        enrichedOrderAsCheckout.setFee(fee);
         enrichedOrderAsCheckout.setTotal(total);
-
         return enrichedOrderAsCheckout;
     }
 }

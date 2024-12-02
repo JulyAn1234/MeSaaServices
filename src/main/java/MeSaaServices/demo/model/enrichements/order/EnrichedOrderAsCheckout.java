@@ -21,7 +21,9 @@ public class EnrichedOrderAsCheckout {
     private boolean ready;
     private boolean complete;
     private List<EnrichedCheckoutItem> foods;
+    private Integer modality;
     private double total;
     private double subtotal;
+    private double fee;
     private double IVA;
 }
