@@ -54,7 +54,6 @@ public class TableService {
 
     private Table convertToEntity(TableDTO tableDTO) {
         return Table.builder()
-                .id(tableDTO.getId())
                 .nombre(tableDTO.getNombre())
                 .capacidad(tableDTO.getCapacidad())
                 .disponible(tableDTO.isDisponible())

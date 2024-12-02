@@ -16,7 +16,7 @@ public class Table {
     @Id
     private String id;
     private String nombre;
-    private String capacidad;
+    private Integer capacidad;
     private boolean disponible;
     private String mesero;
     private String personaTitular;
