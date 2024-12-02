@@ -40,6 +40,14 @@ public class OrderService {
         }
         var table = tableOpt.get();
 
+        if (!table.isDisponible()) {
+            throw new IllegalStateException("Table is already occupied");
+        }
+
+        // Set table as unavailable
+        table.setDisponible(false);
+        tableRepository.save(table);
+
         // Create a new order
         Order order = new Order();
         order.setTable(orderDTO.getMesa());
@@ -49,7 +57,7 @@ public class OrderService {
         order.setComplete(false);
 
         // Assuming that `OrderItem` is a list of food IDs and quantities
-        order.setFoods(orderDTO.getFoods()); // You should use a list of items (food and quantity)
+        order.setFoods(orderDTO.getFoods()); // Use a list of items (food and quantity)
 
         return orderRepository.save(order);
     }
@@ -72,10 +80,25 @@ public class OrderService {
             throw new IllegalArgumentException("Order not found");
         }
         Order order = orderOpt.get();
+
+        if (order.isComplete()) {
+            throw new IllegalStateException("Order is already completed");
+        }
+
+        // Mark order as completed
         order.setComplete(true);
+
+        // Set table as available
+        Optional<Table> tableOpt = tableRepository.findById(order.getTable());
+        if (!tableOpt.isPresent()) {
+            throw new IllegalArgumentException("Table not found");
+        }
+        Table table = tableOpt.get();
+        table.setDisponible(true);
+        tableRepository.save(table);
+
         return orderRepository.save(order);
     }
-
     // 4. Get enriched orders (includes Table and Foods)
     public List<EnrichedOrder> getAllEnrichedOrders() {
         List<Order> orders = orderRepository.findAll();
