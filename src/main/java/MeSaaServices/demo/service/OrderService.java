@@ -53,6 +53,7 @@ public class OrderService {
         order.setTable(orderDTO.getMesa());
         order.setDescription(orderDTO.getDescription());
         order.setCreationDate(orderDTO.getCreationDate());
+        order.setModality(orderDTO.getModality());
         order.setReady(false);
         order.setComplete(false);
 

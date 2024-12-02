@@ -23,6 +23,6 @@ public class Order {
     private String creationDate;
     private boolean ready;
     private boolean complete;
-    private Integer modality;
+    private int modality;
     private List<OrderItem> foods;
 }
