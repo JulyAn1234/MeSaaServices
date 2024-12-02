@@ -199,6 +199,7 @@ public class OrderService {
         enrichedOrderAsCheckout.setFoods(checkoutItems);
         enrichedOrderAsCheckout.setSubtotal(subtotal);
         enrichedOrderAsCheckout.setIVA(iva);
+        enrichedOrderAsCheckout.setModality(order.getModality());
         enrichedOrderAsCheckout.setFee(fee);
         enrichedOrderAsCheckout.setTotal(total);
         return enrichedOrderAsCheckout;
